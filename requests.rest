@@ -1,0 +1,76 @@
+get http://localhost:3000/books
+
+###
+
+get http://localhost:3000/books/B_121
+
+
+###
+
+get http://localhost:3000/users
+
+###
+
+post http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "username":"rajeshwaran",
+    "emailid":"rajesh121waran@email.com",
+    "password":"121Rajesh"
+}
+
+###
+post http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "emailid":"rajesh121waran@email.com",
+    "password":"121Rajesh"
+}
+
+###
+
+
+get http://localhost:3000/issues
+###
+get http://localhost:3000/issues/borrowbook/B_122
+Content-Type: application/json
+
+{
+    "emailid":"Harry@gmail.com",
+    "password":"Passwordss121*"
+
+}
+###
+
+get http://localhost:3000/issues/borrowbook/B_121
+Content-Type: application/json
+
+{
+    "emailid":"rajesh121waran@email.com",
+    "password":"121Rajesh"
+
+}
+
+####
+
+put http://localhost:3000/issues/returnbook/B_121
+Content-Type: application/json
+
+{
+    "emailid":"rajesh121waran@email.com",
+    "password":"121Rajesh"
+
+}
+
+###
+
+put http://localhost:3000/issues/returnbook/B_122
+Content-Type: application/json
+
+{
+    "emailid":"Harry@gmail.com",
+    "password":"Passwordss121*"
+
+}

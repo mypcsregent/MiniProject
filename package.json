@@ -1,0 +1,20 @@
+{
+  "name": "miniproject",
+  "version": "1.0.0",
+  "description": "Library",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Rajeshwaran R",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.2",
+    "pg": "^8.7.1",
+    "sequelize": "^6.6.5"
+  }
+}
