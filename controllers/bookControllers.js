@@ -13,9 +13,6 @@ const pool= new Pool({
 
 const getBooks=async(req,res)=>{
     const response= await pool.query('select * from books');
-    if(response.rows.length==0){
-        res.json('No books');
-    }
     res.status(200).json(response.rows);
 }
 

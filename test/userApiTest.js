@@ -13,8 +13,8 @@ chai.use(chaiHttp);
 describe ("Users APIs", function(){
 
     var newUsers=[{
-        "username":"TestUser",
-        "emailid":"TestUser@test.com",
+        "username":"TestUser4",
+        "emailid":"TestUser4@test.com",
         "password":"Tested121"
     },
     {

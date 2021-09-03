@@ -13,9 +13,6 @@ app.use(require('./routes/userRoutes'));
 app.use(require('./routes/issueRoutes'));
 
 
-app.get('/',(req,res)=>{
-    res.send('Hello');
-})
 
 module.exports=app.listen(PORT,function(){
     db.sequelize.sync();

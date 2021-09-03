@@ -16,7 +16,12 @@ describe("Issues API", function(){
     var borrower=[{
         "emailid":"Harry@gmail.com",
         "password":"Passwordss121*"
-    }]
+    },
+    {
+        "emailid":"Harry@gmail.com",
+        "password":"Passwords21*"
+    }
+]
 
     it("Successfully Borrow Book",(done)=>{
         chai.request(server)
@@ -25,6 +30,18 @@ describe("Issues API", function(){
         .end((err,res)=>{
             should.exist(res);
             res.should.have.status(200);
+            res.body.should.have.a('object');
+            done();
+        })
+        
+    })
+    it("Borrowing the Book the user already has",(done)=>{
+        chai.request(server)
+        .get("/issues/borrowbook/B_121")
+        .send(borrower[0])
+        .end((err,res)=>{
+            should.exist(res);
+            res.should.have.status(409);
             res.body.should.have.a('object');
             done();
         })
@@ -85,6 +102,53 @@ describe("Issues API", function(){
         })
         
     })
+
+
+    it("Wrong credentials while Borrowing Book",(done)=>{
+        chai.request(server)
+        .get("/issues/borrowbook/B_121")
+        .send(borrower[1])
+        .end((err,res)=>{
+            should.exist(res);
+            res.should.have.status(401);
+            res.body.should.have.a('object');
+            console.log(res.body);
+            done();
+        })
+        
+    })
+
+    it("Wrong credentials while Returning Book",(done)=>{
+        chai.request(server)
+        .put("/issues/returnbook/B_121")
+        .send(borrower[1])
+        .end((err,res)=>{
+            should.exist(res);
+            res.should.have.status(401);
+            res.body.should.have.a('object');
+            console.log(res.body);
+            done();
+        })
+        
+    })
+
+    it("borrowing an unavailable book",(done)=>{
+        chai.request(server)
+        .get("/issues/borrowbook/B_124")
+        .send(borrower[0])
+        .end((err,res)=>{
+            should.exist(res);
+            res.should.have.status(410);
+            res.body.should.have.a('object');
+            console.log(res.body);
+            done();
+        })
+        
+    })
+
+
+
+
 
 
 })

@@ -23,7 +23,7 @@ const borrowBook=async(req,res)=>{
     const{emailid,password}=req.body;
     const Matched=await pool.query('select emailid from users where emailid = $1 AND password = $2',[emailid,password]);
     if(Matched.rows.length===0){
-        res.json ({Error:"Wrong Credentials"});
+        res.status(401).json ({Error:"Wrong Credentials"});  
     }
     else{
         console.log({Message:"Credentials Matched" });
@@ -35,7 +35,7 @@ const borrowBook=async(req,res)=>{
             {
                 const AlreadyIssued=await pool.query('select * from issuebooks where isbn= $1 And emailid=$2',[isbn,emailid]);
                 if(AlreadyIssued.rows.length){
-                    res.json({error:`${emailid} already has a copy of book(isbn: ${isbn})`});
+                    res.status(409).json({error:`${emailid} already has a copy of book(isbn: ${isbn})`}); //this has to be tested
                 }
                 else{
                 const date=new Date();
@@ -49,7 +49,7 @@ const borrowBook=async(req,res)=>{
             }
             }
             else{
-                res.json({error:"Book is unavailable right now"});
+                res.status(410).json({error:"Book is unavailable right now"});  //this has to be tested
             }
         }
         else{
@@ -64,7 +64,7 @@ const returnBook=async(req,res)=>{
     const{emailid,password}=req.body;
     const Matched=await pool.query('select emailid from users where emailid = $1 AND password = $2',[emailid,password]);
     if(Matched.rows.length===0){
-        res.json ({Error:"Wrong Credentials"});
+        res.status(401).json ({Error:"Wrong Credentials"}); 
     }
     else
     {

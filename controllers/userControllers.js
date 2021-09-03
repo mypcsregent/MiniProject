@@ -13,9 +13,6 @@ const pool= new Pool({
 
 const getUsers=async(req,res)=>{
     const response= await pool.query('select * from users');
-    if(response.rows.length==0){
-        res.json('No users');
-    }
     res.status(200).json(response.rows);
 }
 
