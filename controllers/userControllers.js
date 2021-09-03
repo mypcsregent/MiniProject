@@ -24,7 +24,7 @@ const createUsers=async(req,res)=>{
     const emailidrows=await pool.query('select emailid from users where emailid = $1',[emailid]);
     if(emailidrows.rows.length>0)
     {
-        res.json({
+        res.status(409).json({
             error:'User Already Exists'
         })
     }
@@ -33,10 +33,6 @@ const createUsers=async(req,res)=>{
     res.status(200).json({message:"Successfully Created the User"});
     }
 }
-
-
-
-
 
 
 module.exports={getUsers,createUsers}

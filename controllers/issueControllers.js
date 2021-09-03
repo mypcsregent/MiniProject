@@ -14,7 +14,7 @@ const getIssues=async(req,res)=>{
 
     const response=await pool.query('select * from issuebooks');
 
-    res.json({rows:response.rows});
+    res.status(200).json({rows:response.rows});
 }
 
 
@@ -41,7 +41,7 @@ const borrowBook=async(req,res)=>{
                 const date=new Date();
                 const issueResponse=await pool.query('insert into issuebooks(isbn,emailid,"createdAt") values ($1,$2,$3)',[isbn,emailid,date]);
                 const booksUpdateResponse= await pool.query('update books set available_count=available_count-1 where isbn= $1',[isbn]);
-                res.json({
+                res.status(200).json({
                         isbn:isbn,
                         emailid:emailid,
                         createdAt:date
@@ -53,7 +53,7 @@ const borrowBook=async(req,res)=>{
             }
         }
         else{
-            res.json({error:`isbn ${isbn} doesnt exist`})
+            res.status(404).json({error:`isbn ${isbn} doesnt exist`})
         }
 
     }
@@ -74,10 +74,10 @@ const returnBook=async(req,res)=>{
 
             const updatedAt=await pool.query('delete from issuebooks where emailid=$1 and isbn=$2',[emailid,isbn]);
             const booksUpdateResponse= await pool.query('update books set available_count=available_count+1 where isbn= $1',[isbn]);
-            res.json({message:"Returned the book successfully",emailid:emailid,isbn:isbn});
+            res.status(200).json({message:"Returned the book successfully",emailid:emailid,isbn:isbn});
         }
         else{
-            res.json({error:`This book (isbn: ${isbn}) was not issued to you, maybe the isbn entered is wrong!`});
+            res.status(409).json({error:`This book (isbn: ${isbn}) was not issued to you, maybe the isbn entered is wrong!`});
         }
     }
 }

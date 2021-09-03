@@ -17,7 +17,7 @@ app.get('/',(req,res)=>{
     res.send('Hello');
 })
 
-app.listen(PORT,function(){
+module.exports=app.listen(PORT,function(){
     db.sequelize.sync();
     console.log(`app running on http://localhost:${PORT}`)
 });

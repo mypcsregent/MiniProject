@@ -2,7 +2,7 @@ get http://localhost:3000/books
 
 ###
 
-get http://localhost:3000/books/B_121
+get http://localhost:3000/books/121
 
 
 ###

@@ -24,7 +24,7 @@ const getBooksByIsbn=async(req,res)=>{
     const isbn=req.params.isbn;
     const response= await pool.query('select * from books where isbn = $1',[isbn]);
     if(response.rows.length==0){
-        res.json(`No books by the isbn= ${isbn}`);
+        res.status(404).json(`No books by the isbn= ${isbn}`);
     }
     res.status(200).json(response.rows);
 }
