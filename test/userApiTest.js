@@ -10,18 +10,8 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 
-describe ("Users APIs", function(){
 
-    var newUsers=[{
-        "username":"TestUser4",
-        "emailid":"TestUser4@test.com",
-        "password":"Tested121"
-    },
-    {
-        "username":"TestUser2",
-        "emailid":"TestUser2@gmail.com"
-        //password is missing...
-    }]
+describe("Users API: Get All users", function(){
 
     it("Should get all users",(done)=>{
         chai.request(server)
@@ -36,6 +26,29 @@ describe ("Users APIs", function(){
                 })
         
     })
+
+})
+
+
+
+describe ("Users APIs : Create an user", function(){
+    var newUsers=[{
+        "username":"TestUser10",
+        "emailid":"TestUser10@test.com",
+        "password":"Tested121"
+    },
+    {
+        "username":"TestUser2",
+        "emailid":"TestUser2@gmail.com"
+        //password is missing...
+    },{
+        "username":"TestUser3",
+        "emailid":"TestUser3@test.com",
+        "password":"Tested121"
+    }]
+
+
+    
 
     it("should show validation error creating user",(done)=>{
         chai.request(server)
@@ -65,7 +78,7 @@ describe ("Users APIs", function(){
     it("Should show user already exists",(done)=>{
         chai.request(server)
                 .post("/users/")
-                .send(newUsers[0])
+                .send(newUsers[2])
                 .end((err,res)=>{
                     should.exist(res);
                     res.should.have.status(409);

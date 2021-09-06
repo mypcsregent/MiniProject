@@ -20,8 +20,24 @@ describe("Issues API", function(){
     {
         "emailid":"Harry@gmail.com",
         "password":"Passwords21*"
+    },
+    {
+        "emailid":"TestUser4@test.com",
+        "password":"Tested121"
     }
 ]
+
+    before( function(done){
+    chai.request(server)
+    .get("/issues/borrowbook/B_123")
+    .send(borrower[2])
+    .end((err,res)=>{
+        done();
+    })
+
+    })  
+
+    
 
     it("Successfully Borrow Book",(done)=>{
         chai.request(server)
@@ -35,10 +51,11 @@ describe("Issues API", function(){
         })
         
     })
+
     it("Borrowing the Book the user already has",(done)=>{
         chai.request(server)
-        .get("/issues/borrowbook/B_121")
-        .send(borrower[0])
+        .get("/issues/borrowbook/B_123")
+        .send(borrower[2])
         .end((err,res)=>{
             should.exist(res);
             res.should.have.status(409);
@@ -64,8 +81,8 @@ describe("Issues API", function(){
 
     it("Successfully Return Book",(done)=>{
         chai.request(server)
-        .put("/issues/returnbook/B_121")
-        .send(borrower[0])
+        .put("/issues/returnbook/B_123")
+        .send(borrower[2])
         .end((err,res)=>{
             should.exist(res);
             res.should.have.status(200);
@@ -77,8 +94,8 @@ describe("Issues API", function(){
 
     it("error while returning the wrong Book",(done)=>{
         chai.request(server)
-        .put("/issues/returnbook/B_121")
-        .send(borrower[0])
+        .put("/issues/returnbook/B_122")
+        .send(borrower[2])
         .end((err,res)=>{
             should.exist(res);
             res.should.have.status(409);
@@ -91,7 +108,7 @@ describe("Issues API", function(){
 
     it("Error while Borrowing Book that doesnt exist",(done)=>{
         chai.request(server)
-        .get("/issues/borrowbook/B_126")
+        .get("/issues/borrowbook/B_127")
         .send(borrower[0])
         .end((err,res)=>{
             should.exist(res);
@@ -148,7 +165,14 @@ describe("Issues API", function(){
 
 
 
-
+after(function(done){
+    chai.request(server)
+        .put("/issues/returnbook/B_121")
+        .send(borrower[0])
+        .end((err,res)=>{
+            done();
+        })
+})
 
 
 })
