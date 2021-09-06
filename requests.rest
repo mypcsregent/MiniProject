@@ -1,9 +1,33 @@
+get http://localhost:3000/issues
+Authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGlkIjoicmFqZXNoMTIxd2FyYW5AZW1haWwuY29tIiwicGFzc3dvcmQiOiIxMjFSYWplc2giLCJpYXQiOjE2MzA5MjE3MDZ9.-tU1VW4XUhO_SG0Inx1OGK-Lqw2MvarZVj3K6pVUafg
+
+###
+put http://localhost:3000/issues/returnbook/B_122
+Authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGlkIjoicmFqZXNoMTIxd2FyYW5AZW1haWwuY29tIiwicGFzc3dvcmQiOiIxMjFSYWplc2giLCJpYXQiOjE2MzA5MjE3MDZ9.-tU1VW4XUhO_SG0Inx1OGK-Lqw2MvarZVj3K6pVUafg
+
+###
+get http://localhost:3000/issues/borrowbook/B_122
+Authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGlkIjoicmFqZXNoMTIxd2FyYW5AZW1haWwuY29tIiwicGFzc3dvcmQiOiIxMjFSYWplc2giLCJpYXQiOjE2MzA5MjE2MjB9.Awpuciiuglrk09YnLN48NlpDfLrw-UpZR09pPIlfeto
+
+
+###
+post http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "emailid":"rajesh121waran@email.com",
+    "password":"121Rajesh"
+}
+
+###
+
 get http://localhost:3000/books
+Authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGlkIjoicmFqZXNoMTIxd2FyYW5AZW1haWwuY29tIiwicGFzc3dvcmQiOiIxMjFSYWplc2giLCJpYXQiOjE2MzA5MjEyMjR9.x8fSgm4uCaBpcRele99i3ceny_oriav7C0VJ2xBUEJU
 
 ###
 
 get http://localhost:3000/books/121
-
+Authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGlkIjoicmFqZXNoMTIxd2FyYW5AZW1haWwuY29tIiwicGFzc3dvcmQiOiIxMjFSYWplc2giLCJpYXQiOjE2MzA5MjEyMjR9.x8fSgm4uCaBpcRele99i3ceny_oriav7C0VJ2xBUEJU
 
 ###
 

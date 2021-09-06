@@ -23,7 +23,9 @@ const getBooksByIsbn=async(req,res)=>{
     if(response.rows.length==0){
         res.status(404).json(`No books by the isbn= ${isbn}`);
     }
+    else{
     res.status(200).json(response.rows);
+}
 }
 
 module.exports={getBooks,getBooksByIsbn}

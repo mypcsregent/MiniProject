@@ -1,5 +1,6 @@
 const {Pool}  = require('pg');
 const { nextTick } = require('process');
+const jwt=require('jsonwebtoken');
 
 const pool= new Pool({
     host:'localhost',
@@ -32,4 +33,19 @@ const createUsers=async(req,res)=>{
 }
 
 
-module.exports={getUsers,createUsers}
+const login=async(req,res)=>{
+
+    const{emailid,password}=req.body;
+    const Matched=await pool.query('select emailid from users where emailid = $1 AND password = $2',[emailid,password]);
+    if(Matched.rows.length===0){
+        res.status(401).json ({Error:"Wrong Credentials"});  
+    }
+    else{
+    const user = { emailid: emailid, password:password };
+    const accessToken=jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+    res.status(200).json({ accessToken: accessToken});
+    }
+}
+
+
+module.exports={getUsers,createUsers,login}

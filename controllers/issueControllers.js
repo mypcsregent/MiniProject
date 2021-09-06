@@ -20,7 +20,7 @@ const getIssues=async(req,res)=>{
 
 const borrowBook=async(req,res)=>{
     const isbn=req.params.isbn;
-    const{emailid,password}=req.body;
+    const{emailid,password}=req.user;
     const Matched=await pool.query('select emailid from users where emailid = $1 AND password = $2',[emailid,password]);
     if(Matched.rows.length===0){
         res.status(401).json ({Error:"Wrong Credentials"});  
@@ -61,7 +61,7 @@ const borrowBook=async(req,res)=>{
 
 const returnBook=async(req,res)=>{
     const isbn=req.params.isbn;
-    const{emailid,password}=req.body;
+    const{emailid,password}=req.user;
     const Matched=await pool.query('select emailid from users where emailid = $1 AND password = $2',[emailid,password]);
     if(Matched.rows.length===0){
         res.status(401).json ({Error:"Wrong Credentials"}); 
